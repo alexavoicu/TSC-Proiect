@@ -37,10 +37,12 @@ Proiect OpenBook - Voicu Alexa-Andreea 331 CD
 | 1   | T491B226K006AT          | [link](https://ro.mouser.com/ProductDetail/KEMET/T491B226K006AT?qs=jcsBHvPDQt8yMdJgz62biA%3D%3D)    | [link](https://ro.mouser.com/datasheet/2/447/KEM_T2005_T491-3316937.pdf)       |
 
 3. Descrierea în detaliu a funcționalității hardware
+
 Dispozitivul este construit în jurul microcontrolerului ESP32-C6-WROOM-1, care asigură conectivitate wireless și procesare locală. La acesta sunt conectate mai multe module periferice prin interfețe standard. Senzorul ambiental BME688 este conectat prin magistrala I2C (SCL – IO7, SDA – IO6), fiind utilizat pentru măsurători de temperatură, umiditate, presiune și compuși volatili. Modulul RTC DS3231SN, care asigură ceasul în timp real, este de asemenea legat prin I2C.
 Modulul de afișare este un e-paper display, controlat prin interfață SPI (MOSI – IO10, MISO – IO9, CLK – IO11), împreună cu pini suplimentari pentru control: EPD_CS (IO12), EPD_DC (IO13), EPD_RST (IO8), EPD_BUSY (IO15).
 Pentru stocare externă, se folosește un chip de memorie NOR Flash W25Q512JVEIQ, conectat tot prin SPI. Alimentarea este realizată cu ajutorul unui regulator LDO (BD5229G-TR) și un controler de încărcare pentru baterie Li-Po (MCP73831).
 Sursa principală este o baterie Li-Po, iar nivelul de încărcare este monitorizat de senzorul MAX17048, conectat tot prin I2C. Estimarea consumului de energie este importantă, întrucât componenta e-paper consumă energie doar la actualizare, iar ESP32-C6 poate intra în moduri de somn profund pentru a conserva bateria. Pinul EN (Enable) este folosit pentru resetarea microcontrolerului, iar IO0 este utilizat pentru intrarea în modul de programare.
 
-4. Pinii ESP32-C6
+5. Pinii ESP32-C6
+
 ESP32-C6 utilizează IO0 pentru activarea modului de boot la programare. IO8 este folosit pentru resetarea afișajului e-paper (EPD_RST), necesară la inițializarea acestuia. IO9 (MISO), IO10 (MOSI) și IO11 (CLK) sunt pinii SPI pentru transferul de date către afișajul e-paper și memoria flash. IO12 acționează ca pin de selectare a chipului (CS) pentru memoria flash externă. IO13 controlează comutarea între comenzi și date către afișaj (EPD_DC), iar IO15 citește starea de ocupat a afișajului (EPD_BUSY), pentru a evita scrierea când e-paper procesează. IO6 (SDA) și IO7 (SCL) formează magistrala I2C comună folosită de senzorul BME688, ceasul RTC DS3231 și senzorul de baterie MAX17048. IO16 (TX) și IO17 (RX) sunt folosiți pentru comunicarea serială UART, utilă la depanare și programare.
