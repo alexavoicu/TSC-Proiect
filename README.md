@@ -5,7 +5,7 @@ Proiect OpenBook - Voicu Alexa-Andreea 331 CD
 ![2](https://github.com/user-attachments/assets/7186af0e-5e1a-4808-a06d-57f2baaeabca)
 
 
-3. BOM cu componentele 3D folosite
+2. BOM cu componentele 3D folosite
 
 | Qty | Component               | Mouser Link | Datasheet Link |
 |-----|--------------------------|-------------|----------------|
