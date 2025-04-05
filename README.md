@@ -34,7 +34,3 @@ Proiect OpenBook - Voicu Alexa-Andreea 331 CD
 | 1   | Ada 4328              | [link](https://ro.mouser.com/ProductDetail/Adafruit/4328?qs=wnTfsH77Xs6Ypm3wH0xoXg%3D%3D)                                                                                                                                                                                                             | [link](https://www.snapeda.com/parts/4328/Adafruit/view-part/?ref=mouser)                                                                     |  |
 | 1   | T491B226K006AT        | [link](https://ro.mouser.com/ProductDetail/KEMET/T491B226K006AT?qs=jcsBHvPDQt8yMdJgz62biA%3D%3D)                                                                                                                                                                                                      | [link](https://ro.mouser.com/datasheet/2/447/KEM_T2005_T491-3316937.pdf)                                                                      |  |
 |     |                       |                                                                                                                                                                                                                                                                                                       |                                                                                                                                               |  |
-
-
-
-3.
