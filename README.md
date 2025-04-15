@@ -5,7 +5,7 @@ Proiect OpenBook - Voicu Alexa-Andreea 331 CD
 ![2](https://github.com/user-attachments/assets/7186af0e-5e1a-4808-a06d-57f2baaeabca)
 
 
-3. BOM cu componentele 3D folosite
+2. BOM cu componentele 3D folosite
 
 | Qty | Component               | Mouser Link | Datasheet Link |
 |-----|--------------------------|-------------|----------------|
@@ -38,11 +38,33 @@ Proiect OpenBook - Voicu Alexa-Andreea 331 CD
 
 3. Descrierea în detaliu a funcționalității hardware
 
-Dispozitivul este construit în jurul microcontrolerului ESP32-C6-WROOM-1, care asigură conectivitate wireless și procesare locală. La acesta sunt conectate mai multe module periferice prin interfețe standard. Senzorul ambiental BME688 este conectat prin magistrala I2C (SCL – IO7, SDA – IO6), fiind utilizat pentru măsurători de temperatură, umiditate, presiune și compuși volatili. Modulul RTC DS3231SN, care asigură ceasul în timp real, este de asemenea legat prin I2C.
-Modulul de afișare este un e-paper display, controlat prin interfață SPI (MOSI – IO10, MISO – IO9, CLK – IO11), împreună cu pini suplimentari pentru control: EPD_CS (IO12), EPD_DC (IO13), EPD_RST (IO8), EPD_BUSY (IO15).
-Pentru stocare externă, se folosește un chip de memorie NOR Flash W25Q512JVEIQ, conectat tot prin SPI. Alimentarea este realizată cu ajutorul unui regulator LDO (BD5229G-TR) și un controler de încărcare pentru baterie Li-Po (MCP73831).
-Sursa principală este o baterie Li-Po, iar nivelul de încărcare este monitorizat de senzorul MAX17048, conectat tot prin I2C. Estimarea consumului de energie este importantă, întrucât componenta e-paper consumă energie doar la actualizare, iar ESP32-C6 poate intra în moduri de somn profund pentru a conserva bateria. Pinul EN (Enable) este folosit pentru resetarea microcontrolerului, iar IO0 este utilizat pentru intrarea în modul de programare.
+ESP32-C6 este microcontrollerul principal care coordonează funcționarea ebook readerului, ocupându-se de procesarea datelor și gestionarea comunicațiilor wireless. Acesta funcționează la 3.3V și dispune de interfețe versatile precum SPI, I2C și USB. Afișajul e-paper este controlat prin interfață SPI, oferind un transfer eficient al imaginilor, în timp ce aceeași magistrală SPI este partajată cu memoria externă NOR Flash, utilizată pentru stocarea firmware-ului și a resurselor grafice, și cu cardul microSD, destinat fișierelor ebook.
 
-5. Pinii ESP32-C6
+Prin interfața I2C sunt conectate mai multe module esențiale: ceasul de timp real DS3231SN, care păstrează ora exactă și poate semnala alarme; senzorul ambiental BME688, ce măsoară temperatura, umiditatea, presiunea și calitatea aerului; și monitorul de baterie MAX17048, care oferă informații despre tensiunea și nivelul de încărcare al bateriei. Această configurație I2C este extinsă prin conectorii Qwiic/Stemma QT, care permit adăugarea rapidă și modulară a altor senzori sau componente compatibile.
 
-ESP32-C6 utilizează IO0 pentru activarea modului de boot la programare. IO8 este folosit pentru resetarea afișajului e-paper (EPD_RST), necesară la inițializarea acestuia. IO9 (MISO), IO10 (MOSI) și IO11 (CLK) sunt pinii SPI pentru transferul de date către afișajul e-paper și memoria flash. IO12 acționează ca pin de selectare a chipului (CS) pentru memoria flash externă. IO13 controlează comutarea între comenzi și date către afișaj (EPD_DC), iar IO15 citește starea de ocupat a afișajului (EPD_BUSY), pentru a evita scrierea când e-paper procesează. IO6 (SDA) și IO7 (SCL) formează magistrala I2C comună folosită de senzorul BME688, ceasul RTC DS3231 și senzorul de baterie MAX17048. IO16 (TX) și IO17 (RX) sunt folosiți pentru comunicarea serială UART, utilă la depanare și programare.
+Dispozitivul este alimentat printr-un port USB-C care furnizează 5V, iar un regulator LDO convertește această tensiune la 3.3V pentru alimentarea componentelor interne. Încărcarea bateriei Li-Po este gestionată prin MCP73831, iar MAX17048 monitorizează constant nivelul bateriei. Un supercapacitor asigură alimentare de rezervă temporară, esențială pentru menținerea orei în cazul pierderii alimentării principale. Diodele TVS sunt incluse pentru protecție ESD pe liniile critice, asigurând durabilitatea dispozitivului.
+
+E-paper-ul este optimizat energetic prin controlul alimentării cu MOSFET și prin monitorizarea semnalelor „busy” și „reset” cu ajutorul GPIO-urilor. Sistemul de stocare include atât memoria NOR Flash de 64MB, cât și cardul microSD, ambele gestionate eficient prin SPI. Interfața de utilizator este compusă din trei butoane: unul pentru resetare manuală, unul pentru intrarea în modul de boot și un buton configurabil pentru funcții speciale.
+
+Pentru depanare și testare, placa include puncte de test (test pads) pentru semnale importante precum SPI, I2C, UART și diverse tensiuni. Acestea permit verificarea rapidă a funcționării sistemului în timpul dezvoltării sau mentenanței. Astfel, întreaga arhitectură este construită în jurul ESP32-C6, asigurând conectivitate flexibilă, eficiență energetică și extindere facilă a funcționalităților.
+
+4. Pinii ESP32-C6
+
+Pinii IO21 (SDA) și IO22 (SCL) sunt folosiți pentru comunicația I2C, partajați de RTC DS3231SN, senzorul BME688 și monitorul de baterie MAX17048. RTC-ul mai folosește IO0 (INT), IO1 (32KHz) și IO18 (RST). Cardul microSD folosește interfața SPI prin IO2 (MISO), IO4 (CS), IO6 (SCK) și IO7 (MOSI), iar memoria NOR Flash partajează SPI cu IO2, IO6, IO7 și adaugă IO11 pentru CS. E-paper-ul folosește IO6 și IO7 pentru date, cu IO3 (BUSY), IO5 (DC), IO10 (CS) și IO23 (RST) pentru control. Pentru butoane și funcții speciale se folosesc IO9 (BOOT), IO15 (CHANGE) și EN (RESET). Un pin rămâne neconectat (NC).
+
+
+Imagini randări OpenBook
+
+PCB 3D
+![image](https://github.com/user-attachments/assets/300acf5d-8a52-463f-afff-429aa3ee2182)
+
+Baterie
+![image](https://github.com/user-attachments/assets/cb6cf446-4aea-45a2-adc2-6f6e06b1e71e)
+
+Display
+![image](https://github.com/user-attachments/assets/794a03a9-cf53-4f6c-b8a9-444949493db8)
+
+OpenBook Asamblat
+![image](https://github.com/user-attachments/assets/24999d7e-aca6-4089-87bb-e656faa88dba)
+
+
