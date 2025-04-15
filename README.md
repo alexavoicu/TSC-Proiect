@@ -51,3 +51,20 @@ Pentru depanare și testare, placa include puncte de test (test pads) pentru sem
 4. Pinii ESP32-C6
 
 Pinii IO21 (SDA) și IO22 (SCL) sunt folosiți pentru comunicația I2C, partajați de RTC DS3231SN, senzorul BME688 și monitorul de baterie MAX17048. RTC-ul mai folosește IO0 (INT), IO1 (32KHz) și IO18 (RST). Cardul microSD folosește interfața SPI prin IO2 (MISO), IO4 (CS), IO6 (SCK) și IO7 (MOSI), iar memoria NOR Flash partajează SPI cu IO2, IO6, IO7 și adaugă IO11 pentru CS. E-paper-ul folosește IO6 și IO7 pentru date, cu IO3 (BUSY), IO5 (DC), IO10 (CS) și IO23 (RST) pentru control. Pentru butoane și funcții speciale se folosesc IO9 (BOOT), IO15 (CHANGE) și EN (RESET). Un pin rămâne neconectat (NC).
+
+
+Imagini randări OpenBook
+
+PCB 3D
+![image](https://github.com/user-attachments/assets/300acf5d-8a52-463f-afff-429aa3ee2182)
+
+Baterie
+![image](https://github.com/user-attachments/assets/cb6cf446-4aea-45a2-adc2-6f6e06b1e71e)
+
+Display
+![image](https://github.com/user-attachments/assets/794a03a9-cf53-4f6c-b8a9-444949493db8)
+
+OpenBook Asamblat
+![image](https://github.com/user-attachments/assets/24999d7e-aca6-4089-87bb-e656faa88dba)
+
+
